@@ -1,0 +1,127 @@
+<!-- Image and text -->
+<nav class="navbar navbar-dark bg-dark p-2 m-text-gray-400">
+  <a class="navbar-brand" href="#">
+    <img src="./assets/images/logo-white.png" width="30" height="30" class="d-m-inline-block align-top" alt="">
+    TextSense
+  </a>
+</nav>
+
+<div class="container-fluid bg-dark px-0">
+  <div class="row mx-0 w-100">
+    <div class="col-sm-12 col-12 col-md-6 mb-3 p-4 ">
+      <h1 class="m-text-4xl m-tracking-tight m-font-extrabold m-text-gray-400 small-text-5xl medium-text-6xl">
+        <span class="m-inline extralarge-m-inline m-text-gray-100">MediTerm</span>
+        <span class="m-inline m-text-indigo-400 extralarge-m-inline">Extraction</span>
+      </h1>
+      <p
+        class="m-mt-3 m-text-base m-text-gray-400 small-mt-5 small-text-lg small-max-w-xl small-mx-auto medium-mt-5 medium-text-xl large-mx-0">
+        <span class="m-inline m-text-gray-100">MediTerm</span>
+        <span class="m-inline m-text-indigo-400">Extraction</span>
+        Solution detects the medical terms (entities) such as diagnosis, anatomy, procedure, medication
+        and signs/symptoms.
+      </p>
+      <p
+        class="m-mt-3 m-text-base m-text-gray-400 small-mt-5 small-text-lg small-max-w-xl small-mx-auto medium-mt-5 medium-text-xl large-mx-0">
+        <span class="m-inline m-text-gray-100">MediTerm</span>
+        <span class="m-inline m-text-indigo-400 ">Extraction</span>
+        Solution detects the medical terms (entities) from medical documents such as clinical note,
+        discharge summary and medical report.
+      </p>
+      <p
+        class="m-mt-3 m-text-base m-text-gray-400 small-mt-5 small-text-lg small-max-w-xl small-mx-auto medium-mt-5 medium-text-xl large-mx-0">
+        <span class="m-inline m-text-gray-100">MediTerm</span>
+        <span class="m-inline m-text-indigo-400 m-inline">Extraction</span>
+        Solution is useful to document the patient's journey, build the knowledge across patients and
+        provide insights to doctors and researchers.
+      </p>
+      <button (click)="movetotarget(target1)" class="m-bg-transparent m-mt-4 m-hover-bg-indigo-400 m-text-indigo-400 m-font-semibold m-hover-text-white 
+        m-py-2 px-4  m-border  m-border-indigo-400 m-hover-border-transparent  m-rounded">
+        Try Demo
+      </button>
+
+    </div>
+    <div class="col-sm-12 col-12 col-md-6 vh-50 px-0">
+      <img src="./assets/images/mediterm.png" class="img-fluid" alt="Responsive image">
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid bg-dark px-0">
+  <div class="row mx-0 w-100">
+    <div class="col-sm-12 col-12 col-md-6 mb-3 p-4 d-flex flex-column justify-content-center">
+      <div class="row" #target1>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error === true">
+          <strong>Error</strong> While fetching the data!
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+            (click)="closeError()"></button>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 m-2" *ngFor="let item of sampleImages; let i = index"
+          style="width: 20vw; height: 25vh;">
+          <div class="hovereffect" (click)="sampleClicked(item, i)">
+            <img src="./assets/images/{{ item.image }}" alt="" class="img-fluid d-inline-block mx-auto">
+            <div class="overlay">
+              <h2>Hover effect 1</h2>
+              <a class="info" href="#">Sample {{ i}}</a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <button *ngIf="submitData === true" (click)="resetText()" class="align-self-center m-bg-transparent m-hover-bg-red-400 m-text-red-400 m-font-semibold 
+                    m-hover-text-white m-py-2 m-px-4 m-border m-border-red-400 m-hover-border-transparent m-rounded">
+        Reset
+      </button>
+      <button *ngIf="submitData === false" (click)="submitText(target2)"
+        class="align-self-center m-bg-transparent m-hover-bg-indigo-400 m-text-indigo-400 m-font-semibold 
+                    m-hover-text-white m-py-2 m-px-4 m-border m-border-indigo-400 m-hover-border-transparent m-rounded">
+        Submit
+      </button>
+    </div>
+    <div class="col-sm-12 col-12 col-md-6 vh-50 px-0">
+      <div *ngIf="showToogle === true">
+        <div class="container">
+          <div class="d-flex flex-wrap my-4">
+            <span class="d-flex align-self-center">
+              <input type="checkbox" checked="checkAnatomy" on-change="switchAnatomy(!checkAnatomy)" id="Anatomy" />
+              <label class="Anatomy" for="Anatomy">Toggle</label>
+              <p class="m-text-gray-400 mx-2">Anatomy</p>
+
+            </span>
+            <span class="d-flex align-self-center">
+              <input type="checkbox" checked="checkDrugs" on-change="switchDrugs(!checkDrugs)" id="Drugs" />
+              <label class="Drugs" for="Drugs">Toggle</label>
+              <p class="m-text-gray-400 mx-2">Drugs</p>
+
+            </span>
+            <span class="d-flex align-self-center">
+              <input type="checkbox" checked="checkDiseases" on-change="switchDiseases(!checkDiseases)" id="Diseases" />
+              <label class="Diseases" for="Diseases">Toggle</label>
+              <p class="m-text-gray-400 mx-2">Diseases</p>
+
+            </span>
+            <span class="d-flex align-self-center">
+              <input type="checkbox" checked="checkDosage" on-change="switchDosage(!checkDosage)" id="Dosage" />
+              <label class="Dosage" for="Dosage">Toggle</label>
+              <p class="m-text-gray-400 mx-2">Dosage</p>
+
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-2" #target2>
+        <div class="container">
+          <p class="m-text-gray-400" [innerHtml]="textArea">
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="py-4 bg-dark flex-shrink-0">
+    <div class="container text-center">
+      <a href="https://algoanalytics.com/" class="text-muted">2020 AlgoAnalytics Pvt. Ltd.</a>
+    </div>
+  </footer>
+  <div *ngIf="loader === true" class="loading">Loading&#8230;</div>
